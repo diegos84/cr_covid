@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+  <form action="" method="POST">
+    <!-- This hidden tag add a CSRF Token that works with the secret key on application.py -->
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <legend class="mb-4">Update your tracker account</legend>
+      <div class="form-group">
+        {% if form.username.errors %}
+          {{ form.username.label(class="form-control-label is-invalid") }}
+          {{ form.username(class="form-control is-invalid") }}
+          <div class="invalid-feedback">
+            {% for error in form.username.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.username.label(class="form-control-label") }}
+          {{ form.username(class="form-control") }}
+        {% endif %}
+      </div>
+      <div class="form-group">
+        {% if form.email.errors %}
+          {{ form.email.label(class="form-control-label is-invalid") }}
+          {{ form.email(class="form-control is-invalid") }}
+          <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.email.label(class="form-control-label") }}
+          {{ form.email(class="form-control") }}
+        {% endif %}
+      </div>
+    </fieldset>
+    <div class="form=group">
+      {{ form.submit(class="btn btn-primary") }}
+    </div>
+  </form>
+</div>
+{% endblock %}

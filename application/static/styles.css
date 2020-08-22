@@ -1,0 +1,69 @@
+html, body {
+    background-color: #f9f7f7;
+    font-family: 'Open Sans', sans-serif;
+    overflow-x: hidden;
+    max-width: 100%;
+  }
+
+body {
+      padding-top: 5%;
+  }
+
+nav .navbar-brand
+{
+        font-size: xx-large;
+}
+
+main .form-control {
+    display: inline-block;
+    width: auto;
+}
+
+
+main {
+    overflow-x: auto;
+    text-align: center;
+}
+
+.form-check {
+    padding-bottom: 0.5%;
+}
+
+footer {
+    position: absolute;
+    padding-top: 0.7%;
+    bottom: 0;
+    width: 100%;
+    background-color: #dbe2ef;
+    color: #112d4e;
+}
+
+h6 {
+    font-size: small;
+}
+
+strong { 
+    font-weight: bold; 
+}
+
+#cntry {
+    text-overflow: ellipsis;    
+    width: 100%;
+    max-width: 80%;
+    overflow: hidden;
+}
+
+#flag {
+    width: 90%;
+    height: inherit;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 4%;
+    overflow: hidden;
+}
+
+#back {
+    float: left;
+    
+}

@@ -1,0 +1,82 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="content-section">
+  <form action="" method="POST">
+    <!-- This hidden tag add a CSRF Token that works with the secret key on application.py -->
+    {{ form.hidden_tag() }}
+    <fieldset class="form-group">
+      <legend class="mb-4">Create your tracker account</legend>
+      <div class="form-group">
+        {% if form.username.errors %}
+          {{ form.username(class="form-control is-invalid", placeholder="Username") }}
+          <div class="invalid-feedback">
+            {% for error in form.username.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.username(class="form-control", placeholder="Username") }}
+        {% endif %}
+      </div>
+      <div class="form-group">
+        {% if form.email.errors %}
+          {{ form.email(class="form-control is-invalid", placeholder="Email") }}
+          <div class="invalid-feedback">
+            {% for error in form.email.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.email(class="form-control", placeholder="Email") }}
+        {% endif %}
+      </div>
+      <div class="form-group">
+        {% if form.password.errors %}
+          {{ form.password(class="form-control is-invalid", placeholder="Password") }}
+          <div class="invalid-feedback">
+            {% for error in form.password.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.password(class="form-control", placeholder="Password") }}
+        {% endif %}
+      </div>
+      <div class="form-group">
+        {% if form.confirm_password.errors %}
+          {{ form.confirm_password(class="form-control is-invalid", placeholder="Confirm Password") }}
+          <div class="invalid-feedback">
+            {% for error in form.confirm_password.errors %}
+              <span>{{ error }}</span>
+            {% endfor %}
+          </div>
+        {% else %}
+          {{ form.confirm_password(class="form-control", placeholder="Confirm Password") }}
+        {% endif %}
+      </div>
+      <div class="form-group">
+        <select class="form-control">
+          {% for canton in cantons %}
+            <option value="{{ canton }}"{% if loop.first %} selected disabled {% endif %} name="canton">{{ canton[0] }}</option>
+          {% endfor %}
+        </select>
+      </div>
+      <div class="form-group">
+        <select class="form-control">
+          {% for plate in plates %}
+            <option value="{{ plate }}"{% if loop.first %} selected disabled {% endif %} name="plate">{{ plate }}</option>
+          {% endfor %}
+        </select>
+      </div>
+    </fieldset>
+    <div class="form=group">
+      {{ form.submit(class="btn btn-primary") }}
+    </div>
+  </form>
+</div>
+<div class="pt-3" id="regist">
+  <small class="text-muted">
+    Already have an acccount? <a href="{{ url_for('login') }}">Log in here</a>
+  </small>
+</div>
+{% endblock %}

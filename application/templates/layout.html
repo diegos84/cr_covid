@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <!-- Standards required by Boostrap, character set and the viewpowrt meta for responsive behaviours on this page -->
+    <!-- Boostrap library, must be pasted before any other stylesheet -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <!-- Google fonts API-->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <!-- My stylesheet, pasted after Bootcamp for style.css to work when overriding Bootcamp-->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+      {% if title %}
+        <title>CR COVID Tracker - {{ title }}</title>
+      {% else %}
+        <title>CR COVID Tracker</title>
+      {% endif %}
+  </head>
+  <body>
+    {% if current_user.is_authenticated %}
+    <nav class="navbar fixed-top navbar-expand-md navbar-dark" style="background-color: #112d4e;">
+      <a class="navbar-brand" href="{{ url_for('home') }}">CR COVID</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ml-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('account') }}">Account Changes</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
+              </li>
+            </ul>
+        </div>
+      </nav>
+    {% else %}
+      <nav class="navbar fixed-top navbar-expand-md navbar-dark" style="background-color: #112d4e;">
+        <a class="navbar-brand" href="{{ url_for('home') }}">CR COVID</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('login') }}">Log In</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('register') }}">Register</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    {% endif %}
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% for category, message in messages %}
+        <header>
+          <div class="alert alert-{{ category }} border text-center" role="alert">
+            {{ message }}
+          </div>
+        </header>
+      {% endfor %}
+    {% endwith %}
+    <main role="main" class="container p-5">
+      <div>
+        {% block content %}{% endblock %}
+      </div>
+    </main>
+    <footer class="fixed-bottom">
+      <div>
+        <h6 class="text-center" id="copyrights">Copyright &copy; 2020 Diego Sanchez C. All rights reserved.</h6>
+        <!-- Ionicons icon set -->
+        <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+        <!-- Plugins for Bootstrap, 1st jQuery, then Popper.js and JavaScript last.-->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+      </div>
+    </footer>
+</body>
+</html>
