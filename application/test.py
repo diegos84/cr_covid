@@ -1,3 +1,4 @@
+# Testing app only, not connected to the rest of the project
 import requests
 
 def all_countries():

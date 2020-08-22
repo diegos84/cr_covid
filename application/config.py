@@ -1,6 +1,6 @@
 import os
 
-
+# Configurations set inside a class to allow using inheritance to set different configurations if needed
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
     SQLALCHEMY_DATABASE_URI = os.environ.get('SQLALCHEMY_DATABASE_URI')

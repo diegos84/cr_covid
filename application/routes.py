@@ -20,8 +20,10 @@ with open('application/static/cantons.csv', newline='') as csv_file:
 @app.route("/", methods=["GET", "POST"])
 @app.route("/home", methods=["GET", "POST"])
 def home():
+    # Require users to be logged in to use web app
     if not current_user.is_authenticated:
         return redirect(url_for('login'))
+    # Use functions containing data from API call for select dropdown on GET method and user query on POST method
     if request.method == "GET":
         countries = all_countries()
         cr_covid = api_call('CRI')
