@@ -11,7 +11,7 @@
         <div class="form-group">
           <select class="form-control" name="choose_country" id="cntry">
             {% for key, value in countries %}
-              <option value="{{ key }}">{{ value }}</option>
+              <option value="{{ key }}" {% if key == "USA" %} selected="selected" {% endif %}>{{ value }}</option>
             {% endfor %}
           </select>
         </div>
