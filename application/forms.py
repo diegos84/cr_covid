@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from flask_login import current_user
-from wtforms import StringField, PasswordField, SubmitField, IntegerField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, IntegerField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, EqualTo, NumberRange, Regexp, Email, ValidationError
 from application.models import Users
 
@@ -70,3 +70,7 @@ class ResetPasswordForm(FlaskForm):
     confirm_password = PasswordField('confirm password', validators=[DataRequired(), 
                                     EqualTo('password', message="Password must match the confirmation")])
     submit = SubmitField('Reset')
+
+
+class LicensePlate(FlaskForm):
+    digits = SelectField('digits', choices=[1, 2, 3, 4, 5, 6, 7, 8, 9, 0])

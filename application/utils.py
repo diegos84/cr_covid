@@ -1,13 +1,17 @@
 import requests
+import csv
 from flask import  url_for
 from flask_mail import Message
 from application import mail
+from bs4 import BeautifulSoup
+
 
 def send_reset_email(user):
     token = user.get_reset_token()
     msg = Message('Password Reset Request', 
                 sender='noreply-crcovidtracker@outlook.com', 
                 recipients=[user.email])
+    # Embedded text must not be indented, or else the indentation will show on the email sent to the user
     msg.body = f'''Please visit the following link to resert your password:
 {url_for('reset_token', token=token, _external=True)}
 
@@ -49,3 +53,27 @@ def all_countries():
     for c in payload:
         countries.append((c['countryInfo']['iso3'], c['country']))
     return countries
+
+
+def get_the_news():
+    # Using .text at the end or else .get will return only the response code from the server
+    source = requests.get('https://ticotimes.net/post-covid-19-updates').text
+    # Using lxml parser for beautiful soup
+    soup = BeautifulSoup(source, 'lxml')
+    # Create a list to append all the scrapped data and return it
+    news = []
+    # Iterate through segment and find all the tags with relevant data
+    # Must use an underscore after the word 'class' to differenciate from the keyword for classes in Python
+    for segment in soup.find_all('div', class_='poster size-normal size-350'):
+        # Must use [] to get the value from an attribute in a tag
+        link = segment.find('a', class_='poster-image mt-radius')['href']
+        photo = segment.find('img')['src']
+        headline = segment.find('h2').text
+        timestamp = segment.find('span', class_='color-silver-light mt-pl-d').text
+        # Using .strip() to remove leading and trailing whitespaces
+        content = [headline.strip(), link, photo, timestamp.strip()]
+        news.append(content)
+
+    return(news)
+
+

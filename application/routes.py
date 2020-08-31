@@ -4,55 +4,47 @@ import csv
 from flask import Flask, flash, redirect, render_template, request, session, url_for
 from application import app, db, bcrypt
 from application.models import Users
-from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm
+from application.forms import RegistrationForm, LoginForm, UpdateAccountForm, RequestResetForm, ResetPasswordForm, LicensePlate
 from application.handlers import error_403, error_404, error_500
-from application.utils import send_reset_email, api_call, all_countries
+from application.utils import send_reset_email, api_call, all_countries, get_the_news
 from flask_login import login_user, current_user, logout_user, login_required
 
+# COMENT-OUT LIST, NOT RELEVANT SINCE LAST POLICY CHANGE BY THE GOVERNMENT
+# cantons = []    
+# with open('application/static/cantons.csv', newline='') as csv_file:
+#     csv_reader = csv.reader(csv_file)
+#     cantons = list(csv_reader)
 
-
-plates = ['License Plate Digit', 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-cantons = []    
-with open('application/static/cantons.csv', newline='') as csv_file:
-    csv_reader = csv.reader(csv_file)
-    cantons = list(csv_reader)
 
 @app.route("/", methods=["GET", "POST"])
 @app.route("/home", methods=["GET", "POST"])
 def home():
-    # Require users to be logged in to use web app
-    if not current_user.is_authenticated:
-        return redirect(url_for('login'))
-    # Use functions containing data from API call for select dropdown on GET method and user query on POST method
-    if request.method == "GET":
-        countries = all_countries()
-        cr_covid = api_call('CRI')
-        return render_template("index.html", title="home", cr_covid=cr_covid, countries=countries)
-    cr_covid = api_call('cri')
-    country = request.form.get("choose_country")
-    country_covid = api_call(country)
-    return render_template("index.html", title="home", cr_covid=cr_covid, country_covid=country_covid, country=country)
-
+  # Use functions containing data from API call for select dropdown on GET method and user query on POST method
+  if request.method == "GET":
+      countries = all_countries()
+      cr_covid = api_call('CRI')
+      return render_template('index.html', title='Stats', cr_covid=cr_covid, countries=countries)
+  cr_covid = api_call('cri')
+  country = request.form.get('choose_country')
+  country_covid = api_call(country)
+  articles = get_the_news()
+  return render_template('index.html', title='Stats', cr_covid=cr_covid, country_covid=country_covid, country=country, articles=articles)
+  
+    
 
 @app.route("/register", methods=["GET", "POST"])
 def register():
-    if current_user.is_authenticated:
-        return redirect(url_for('home'))
-    form = RegistrationForm()
-    if form.validate_on_submit():
-        # if not request.form.get("canton"):
-        #     flash('Please provide a canton', 'danger')
-        #     return redirect(url_for('register'))
-        # if not request.form.get("plate"):
-        #     flash('Please provide a license plate digit', 'danger')
-        #     return redirect(url_for('register'))
-        hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
-        user = Users(username=form.username.data, email=form.email.data, password=hashed_password)
-        db.session.add(user)
-        db.session.commit()
-        flash(f'Account {form.username.data} created! Now you can log in', 'primary')
-        return redirect(url_for('login'))
-    return render_template('register.html', title='Register', form=form, cantons=cantons, plates=plates)     
+  if current_user.is_authenticated:
+    return redirect(url_for('home'))
+  form = RegistrationForm()
+  if form.validate_on_submit():
+    hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
+    user = Users(username=form.username.data, email=form.email.data, password=hashed_password)
+    db.session.add(user)
+    db.session.commit()
+    flash(f'Account {form.username.data} created! Now you can log in', 'primary')
+    return redirect(url_for('login'))
+  return render_template('register.html', title='Register', form=form)     
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -76,10 +68,10 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-@app.route("/account", methods=['GET', 'POST'])
+@app.route("/account", methods=["GET", "POST"])
 @login_required
 def account():
-    form = UpdateAccountForm()
+    form = UpdateAccountForm()                                                                                                                                                                                   
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.email = form.email.data
@@ -90,8 +82,6 @@ def account():
         form.username.data = current_user.username
         form.email.data = current_user.email
     return render_template('account.html', title='Account Changes', form=form)
-
-
 
 
 @app.route("/reset_password", methods=["GET", "POST"])
@@ -123,3 +113,33 @@ def reset_token(token):
         flash('Your password has been updated! Now you can log in', 'primary')
         return redirect(url_for('login'))
     return render_template('reset_token.html', title='Reset Password', form=form)
+
+
+@app.route("/moving_arround", methods=["GET", "POST"])
+def moving_arround():
+    form = LicensePlate()
+    even = [0, 2, 4, 6, 8]
+    odd = [1, 3, 5, 7, 9]
+    if form.validate_on_submit():
+        plate = int(form.digits.data)
+        return render_template('moving_arround.html', title='Moving Arround', plate=plate, form=form, even=even, odd=odd)
+    return render_template('moving_arround.html', title='Moving Arround', form=form)
+
+
+@app.route("/news")
+def news():
+    news = get_the_news()
+    return render_template('news.html', title='News', news=news)
+
+
+@app.route("/stats", methods=["GET", "POST"])
+def stats():
+  # Use functions containing data from API call for select dropdown on GET method and user query on POST method
+  if request.method == "GET":
+      countries = all_countries()
+      return render_template('stats.html', title='Stats', countries=countries)
+  countries = all_countries()
+  cr_covid = api_call('cri')
+  country = request.form.get('choose_country')
+  country_covid = api_call(country)
+  return render_template('stats.html', title='Stats', cr_covid=cr_covid, country_covid=country_covid, countries=countries, country=country)

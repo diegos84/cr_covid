@@ -54,22 +54,8 @@
           {{ form.confirm_password(class="form-control", placeholder="Confirm Password") }}
         {% endif %}
       </div>
-      <div class="form-group">
-        <select class="form-control">
-          {% for canton in cantons %}
-            <option value="{{ canton }}"{% if loop.first %} selected disabled {% endif %} name="canton">{{ canton[0] }}</option>
-          {% endfor %}
-        </select>
-      </div>
-      <div class="form-group">
-        <select class="form-control">
-          {% for plate in plates %}
-            <option value="{{ plate }}"{% if loop.first %} selected disabled {% endif %} name="plate">{{ plate }}</option>
-          {% endfor %}
-        </select>
-      </div>
     </fieldset>
-    <div class="form=group">
+    <div class="form-group">
       {{ form.submit(class="btn btn-primary") }}
     </div>
   </form>

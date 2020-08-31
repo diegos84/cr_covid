@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+{% block content %}
+  <div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <h1 class="display-4">Transportation & COVID-19</h1>
+      <p class="lead">Costarrican authorities have placed a restriction on the amount of vehicles that may circulate within a given schedule. You are allowed to circulate depending on the day of the week and the last digit of the vehicle's license plate. It is important to mention that these restrictions DO NOT APPLY TO RENTED CARS, but only if you present proof that the car is rented to the police officer in order to avoid the removal of the license plates and a ticket for 107,000.00 CRC (about 178.00 USD)</p>
+    </div>
+    <div class="row justify-content-md-center" style="margin-bottom: 10px;">
+      <div class="col-md-auto" style="margin-top: 25px;">
+        <h2>Enter the last digit on your license plate</h2>
+      </div>
+    </div>
+    <div class="row justify-content-md-center">
+      <div class="col-md-auto">
+        <form action="" method="POST">
+          {{ form.hidden_tag() }}
+          <fieldset class="form-group">
+            {{ form.digits(class="form-control") }}
+            <div class="form-group" style="margin-top: 10px;">
+              <button class="btn btn-primary" type="submit">Look up</button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+  {% if request.method == "POST" %}
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+          <h3>Vehicular restriction for this week</h3>
+        </div> 
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col" id="weekday">
+          <div class="card" {% if plate in range(1, 3) %} style="background-color:#C1272D"; {% else %} style="background-color:#112d4e"; {% endif %}>
+            <h5 style="color: white;">MON</h5>
+          </div>
+        </div>
+        <div class="col" id="weekday">
+          <div class="card" {% if plate in range(3, 5) %} style="background-color:#C1272D"; {% else %} style="background-color:#112d4e"; {% endif %}>
+            <h5 style="color: white;">TUE</h5>
+          </div>
+        </div>
+        <div class="col" id="weekday">
+          <div class="card" {% if plate in range(5, 7) %} style="background-color:#C1272D"; {% else %} style="background-color:#112d4e"; {% endif %}>
+            <h5 style="color: white;">WED</h5>
+          </div>
+        </div>
+        <div class="col" id="weekday">
+          <div class="card" {% if plate in range(7, 9) %} style="background-color:#C1272D"; {% else %} style="background-color:#112d4e"; {% endif %}>
+            <h5 style="color: white;">THU</h5>
+          </div>
+        </div>
+        <div class="col" id="weekday">
+          <div class="card" {% if plate == 9 or plate == 0 %} style="background-color:#C1272D"; {% else %} style="background-color:#112d4e"; {% endif %}>
+            <h5 style="color: white;">FRI</h5>
+          </div>
+        </div>
+        <div class="col" id="weekday">
+          <div class="card" {% if plate in even %} style="background-color:#C1272D"; {% else %} style="background-color:#3f72af"; {% endif %}>
+            <h5 style="color: white;">SAT</h5>
+          </div>
+        </div>
+        <div class="col" id="weekday">
+          <div class="card" {% if plate in odd %} style="background-color:#C1272D"; {% else %} style="background-color:#3f72af"; {% endif %}>
+            <h5 style="color: white;">SUN</h5>
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-md-center">
+        <div class="col-md-auto" style="margin-top: 20px;">
+          <div class="row d-flex ">
+            <span class="blue_dot"></span><p>From 5am to 10pm</p>
+          </div>
+          <div class="row d-flex">
+            <span class="red_dot"></span><p>Cannot circulate</p>
+          </div>
+          <div class="row d-flex">
+            <span class="light_dot"></span><p>From 5am to 8pm</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}

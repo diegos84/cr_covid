@@ -25,10 +25,21 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                <a class="nav-link" href="{{ url_for('account') }}">Account Changes</a>
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Tools
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="{{ url_for('news') }}">News Feed</a>
+                  <a class="dropdown-item" href="{{ url_for('stats') }}">COVID-19 Stats</a>
+                  <a class="dropdown-item" href="{{ url_for('moving_arround') }}">Moving Arround CR</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{{ url_for('account') }}">Account Changes</a>
+                </div>
               </li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
               <li class="nav-item">
                 <a class="nav-link" href="{{ url_for('logout') }}">Logout</a>
               </li>
@@ -53,7 +64,9 @@
         </div>
       </nav>
     {% endif %}
-    {% with messages = get_flashed_messages(with_categories=true) %}
+    <div class="row justify-content-md-center" style="margin-top: 18px;">
+      {% with messages = get_flashed_messages(with_categories=true) %}
+    </div>
       {% for category, message in messages %}
         <header>
           <div class="alert alert-{{ category }} border text-center" role="alert">

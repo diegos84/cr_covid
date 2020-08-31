@@ -1,0 +1,70 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class="container">
+  <div class="row justify-content-md-center">
+    <div class="col-md-12">
+      <h2>COVID-19 Stats</h2>
+    </div>
+    <div class="col-md-6" style="margin: 25px;">
+      <h4>Choose a country to compare</h4>
+      <form action="{{ url_for('stats')}}" method="POST">
+        <div class="form-group">
+          <select class="form-control" name="choose_country" id="cntry">
+            {% for key, value in countries %}
+              <option value="{{ key }}">{{ value }}</option>
+            {% endfor %}
+          </select>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+  {% if request.method == "POST" %}
+    <div class="row justify-content-md-center"">
+      <div class="col-md-12" style="margin-top: 20px;">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Criteria</th>
+              <th scope="col">Costa Rica</th>
+              <th scope="col">{{ country_covid['country'] }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Total Cases</th>
+              <td>{{ cr_covid["cases"] }}</td>
+              <td>{{ country_covid["cases"] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Active Cases</th>
+              <td>{{ cr_covid["active"] }}</td>
+              <td>{{ country_covid["active"] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Total Deaths</th>
+              <td>{{ cr_covid["deaths"] }}</td>
+              <td>{{ country_covid["deaths"] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Cases/Million</th>
+              <td>{{ cr_covid["cases_per_million"] }}</td>
+              <td>{{ country_covid["cases_per_million"] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Deaths/Million</th>
+              <td>{{ cr_covid["deaths_per_million"] }}</td>
+              <td>{{ country_covid["deaths_per_million"] }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Tests/million</th>
+              <td>{{ cr_covid["tests_per_million"] }}</td>
+              <td>{{ country_covid["tests_per_million"] }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  {% endif %}
+</div>
+{% endblock content %}

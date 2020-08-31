@@ -1,64 +1,62 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container">
-  <a class="btn btn-primary" href="{{ url_for('home') }}" role="button" id="back">Go  back</a>
-  <div class="row">
-    <div class="col-sm-6 ml-md-auto">
-      <div class="card w-90">
-        <img src="{{ cr_covid["flag"] }}" class="card-img-top" alt="Costa Rica's flag" id="flag">
-        <div class="card-body">
-          <h2 class="card-title">{{ cr_covid['country'] }}</h2>
-        </div>
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">Total: <strong>{{ cr_covid["cases"] }}</strong></li>
-          <li class="list-group-item">Active: <strong>{{ cr_covid["active"] }}</strong></li>
-          <li class="list-group-item">Critical: <strong>{{ cr_covid["critical"] }}</strong></li>
-          <li class="list-group-item">Deaths: <strong>{{ cr_covid["deaths"] }}</strong></li>
-          <li class="list-group-item">Tests: <strong>{{ cr_covid["tests"] }}</strong></li>
-          <li class="list-group-item">Cases per million: <strong>{{ cr_covid["cases_per_million"] }}</strong></li>
-          <li class="list-group-item">Deaths per million: <strong>{{ cr_covid["deaths_per_million"] }}</strong></li>
-          <li class="list-group-item">Tests per million: <strong>{{ cr_covid["tests_per_million"] }}</strong></li>
-        </ul>
-      </div>
-    </div>
-    {% if request.method == "GET" %}
+  <div class="container">
+    <a class="btn btn-primary" href="{{ url_for('home') }}" role="button" id="back">Go  back</a>
+    <div class="row">
       <div class="col-sm-6 ml-md-auto">
         <div class="card w-90">
           <div class="card-body">
-            <h2 class="card-title">Choose a country</h2>
-            <form action="{{ url_for('home')}}" method="POST">
-              <div class="form-group">
-                <select class="form-control" name="choose_country" id="cntry">
-                  {% for key, value in countries %}
-                    <option value="{{ key }}">{{ value }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-              <button class="btn btn-primary" type="submit">Submit</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    {% else %}
-      <div class="col-sm-6 ml-md-auto">
-        <div class="card w-90">
-          <img src="{{ country_covid['flag'] }}" class="card-img-top" alt="{{ country_covid['country'] }}'s flag" id="flag">
-          <div class="card-body">
-            <h2 class="card-title">{{ country_covid['country'] }}</h2>
+            <h3 class="card-title">{{ cr_covid['country'] }}</h3>
           </div>
           <ul class="list-group list-group-flush">
-            <li class="list-group-item">Total: <strong>{{ country_covid["cases"] }}</strong></li>
-            <li class="list-group-item">Active: <strong>{{ country_covid["active"] }}</strong></li>
-            <li class="list-group-item">Critical: <strong>{{ country_covid["critical"] }}</strong></li>
-            <li class="list-group-item">Deaths: <strong>{{ country_covid["deaths"] }}</strong></li>
-            <li class="list-group-item">Tests: <strong>{{ country_covid["tests"] }}</strong></li>
-            <li class="list-group-item">Cases per million: <strong>{{ country_covid["cases_per_million"] }}</strong></li>
-            <li class="list-group-item">Deaths per million: <strong>{{ country_covid["deaths_per_million"] }}</strong></li>
-            <li class="list-group-item">Tests per million: <strong>{{ country_covid["tests_per_million"] }}</strong></li>
+            <li class="list-group-item">Total: <strong>{{ cr_covid["cases"] }}</strong></li>
+            <li class="list-group-item">Active: <strong>{{ cr_covid["active"] }}</strong></li>
+            <li class="list-group-item">Critical: <strong>{{ cr_covid["critical"] }}</strong></li>
+            <li class="list-group-item">Deaths: <strong>{{ cr_covid["deaths"] }}</strong></li>
+            <li class="list-group-item">Tests: <strong>{{ cr_covid["tests"] }}</strong></li>
+            <li class="list-group-item">Cases per million: <strong>{{ cr_covid["cases_per_million"] }}</strong></li>
+            <li class="list-group-item">Deaths per million: <strong>{{ cr_covid["deaths_per_million"] }}</strong></li>
+            <li class="list-group-item">Tests per million: <strong>{{ cr_covid["tests_per_million"] }}</strong></li>
           </ul>
         </div>
       </div>
-    {% endif %} 
+      {% if request.method == "GET" %}
+        <div class="col-sm-6 ml-md-auto">
+          <div class="card w-90">
+            <div class="card-body">
+              <h3 class="card-title">Choose a country</h3>
+              <form action="{{ url_for('home')}}" method="POST">
+                <div class="form-group">
+                  <select class="form-control" name="choose_country" id="cntry">
+                    {% for key, value in countries %}
+                      <option value="{{ key }}">{{ value }}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <button class="btn btn-primary" type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class="col-sm-6 ml-md-auto">
+          <div class="card w-90">
+            <div class="card-body">
+              <h3 class="card-title">{{ country_covid['country'] }}</h3>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Total: <strong>{{ country_covid["cases"] }}</strong></li>
+              <li class="list-group-item">Active: <strong>{{ country_covid["active"] }}</strong></li>
+              <li class="list-group-item">Critical: <strong>{{ country_covid["critical"] }}</strong></li>
+              <li class="list-group-item">Deaths: <strong>{{ country_covid["deaths"] }}</strong></li>
+              <li class="list-group-item">Tests: <strong>{{ country_covid["tests"] }}</strong></li>
+              <li class="list-group-item">Cases per million: <strong>{{ country_covid["cases_per_million"] }}</strong></li>
+              <li class="list-group-item">Deaths per million: <strong>{{ country_covid["deaths_per_million"] }}</strong></li>
+              <li class="list-group-item">Tests per million: <strong>{{ country_covid["tests_per_million"] }}</strong></li>
+            </ul>
+          </div>
+        </div>
+      {% endif %} 
+    </div>
   </div>
-</div>
 {% endblock content %}

@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+	<div class="container">
+		<div class="row justify-content-md-center">
+			<div class="col-md-12" style="margin-top: 35px;">
+				<div class="col-md-12 text-left" style="padding-bottom:3%;">
+					<h2 class="heading heading-left">News feed courtesy of</h2>
+					<img src="https://ticotimes.net/wp-content/uploads/2019/04/Horizontal_Logo.jpg" id="logo_ticotimes">
+        </div>
+				<div class="row justify-content-md-center">
+					{% for n in news%}
+						<div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 column-first">
+							<div class="poster size-normal size-350">
+								<a class="poster-image" href="{{ n[1] }}">
+									<div class="mt-post-image" style="padding: 0px 12px;">
+										<img width="100%" height="auto" src="{{ n[2] }}" alt="TicoTimes article photo">
+									</div>
+								</a>
+								<div class="poster-content-wrap" style="padding-left: 14px;">
+									<a href="{{ n[1] }}" target="_blank" class="text-left" ><h4>{{ n[0] }}</h4></a>
+									<p class="text-muted text-left">{{ n[3] }}</p>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</div>
+{% endblock content %}

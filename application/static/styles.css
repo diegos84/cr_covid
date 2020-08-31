@@ -1,69 +1,129 @@
 html, body {
-    background-color: #f9f7f7;
-    font-family: 'Open Sans', sans-serif;
-    overflow-x: hidden;
-    max-width: 100%;
-  }
+  background-color: white;
+  font-family: 'Open Sans', sans-serif;
+  overflow-x: hidden;
+  max-width: 100%;
+}
 
 body {
-      padding-top: 5%;
-  }
+  padding-top: 5%;
+}
 
 nav .navbar-brand
 {
-        font-size: xx-large;
+  font-size: xx-large;
+}
+
+main {
+  overflow-x: auto;
+  text-align: center;
 }
 
 main .form-control {
-    display: inline-block;
-    width: auto;
-}
-
-
-main {
-    overflow-x: auto;
-    text-align: center;
-}
-
-.form-check {
-    padding-bottom: 0.5%;
+  display: inline-block;
+  width: auto;
 }
 
 footer {
-    position: absolute;
-    padding-top: 0.7%;
-    bottom: 0;
-    width: 100%;
-    background-color: #dbe2ef;
-    color: #112d4e;
+  position: absolute;
+  padding-top: 0.7%;
+  bottom: 0;
+  width: 100%;
+  background-color: #dbe2ef;
+  color: #112d4e;
+}
+
+h5 {
+  margin-bottom: 0px;
 }
 
 h6 {
-    font-size: small;
+  font-size: small;
 }
 
 strong { 
-    font-weight: bold; 
+  font-weight: bold; 
+}
+
+thead {
+  background-color: #3f72af;
+  color: #f9f7f7;
+}
+
+.navbar-nav > li > .dropdown-menu { 
+  background-color: #dbe2ef;
+}
+
+.dropdown-menu > li > a:hover, .dropdown-menu > li > a:focus {
+  background-color: #3f72af;
+}
+
+.form-check {
+  padding-bottom: 0.5%;
+}
+
+.blue_dot {
+  height: 25px;
+  width: 25px;
+  background-color: #112d4e;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.red_dot {
+  height: 25px;
+  width: 25px;
+  background-color: #C1272D;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.light_dot {
+  height: 25px;
+  width: 25px;
+  background-color: #3f72af;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.jumbotron {
+  background-color: #dbe2ef;
+  text-align: justify;
+  padding: 40px 25px;
+}
+
+#weekday {
+  padding: 10px;
+  min-width: 80px;
+  white-space: nowrap;   
 }
 
 #cntry {
-    text-overflow: ellipsis;    
-    width: 100%;
-    max-width: 80%;
-    overflow: hidden;
+  text-overflow: ellipsis;    
+  width: 100%;
+  max-width: 80%;
+  overflow: hidden;
 }
 
 #flag {
-    width: 90%;
-    height: inherit;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 4%;
-    overflow: hidden;
+  width: 90%;
+  height: inherit;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 4%;
+  overflow: hidden;
 }
 
 #back {
-    float: left;
-    
+  float: left;
+}
+
+#logo_ticotimes {
+  object-fit: contain;
+  max-width: 100%;
+  height: auto;
 }
