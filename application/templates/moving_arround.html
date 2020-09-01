@@ -1,10 +1,6 @@
 {% extends "layout.html" %}
 {% block content %}
-  <div class="container">
-    <div class="jumbotron jumbotron-fluid">
-      <h1 class="display-4">Transportation & COVID-19</h1>
-      <p class="lead">Costarrican authorities have placed a restriction on the amount of vehicles that may circulate within a given schedule. You are allowed to circulate depending on the day of the week and the last digit of the vehicle's license plate. It is important to mention that these restrictions DO NOT APPLY TO RENTED CARS, but only if you present proof that the car is rented to the police officer in order to avoid the removal of the license plates and a ticket for 107,000.00 CRC (about 178.00 USD)</p>
-    </div>
+  <div class="container" style="margin-top: 10%;">
     <div class="row justify-content-md-center" style="margin-bottom: 10px;">
       <div class="col-md-auto" style="margin-top: 25px;">
         <h2>Enter the last digit on your license plate</h2>
@@ -25,9 +21,9 @@
     </div>
   </div>
   {% if request.method == "POST" %}
-    <div class="container">
+    <div class="container" style="margin-top: 0%;">
       <div class="row justify-content-md-center">
-        <div class="col-md-auto">
+        <div class="col-md-auto" style="margin-bottom: 2%;">
           <h3>Vehicular restriction for this week</h3>
         </div> 
       </div>
@@ -69,8 +65,8 @@
         </div>
       </div>
       <div class="row justify-content-md-center">
-        <div class="col-md-auto" style="margin-top: 20px;">
-          <div class="row d-flex ">
+        <div class="col-md-auto" style="margin: 3% 0% 5%;">
+          <div class="row d-flex">
             <span class="blue_dot"></span><p>From 5am to 10pm</p>
           </div>
           <div class="row d-flex">
@@ -83,4 +79,14 @@
       </div>
     </div>
   {% endif %}
+  <div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <h1 class="display-4">Transportation & COVID-19</h1>
+      <p class="lead">Costarrican authorities have placed a restriction on the amount of vehicles that may circulate 
+        depending on the day of the week and the last digit of your vehicle's license plate. These restrictions
+        <b style="color: #C1272D;">DO NOT APPLY TO RENTED CARS</b>, but you must present proof that the car is rented to avoid 
+        the removal of the license plates and a ticket for 107,000.00<i><small>CRC</small></i> (about 180.00<i><small>USD</small></i>).
+      </p>
+    </div>
+  </div>
 {% endblock %}

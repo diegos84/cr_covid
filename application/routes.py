@@ -23,12 +23,12 @@ def home():
   if request.method == "GET":
       countries = all_countries()
       cr_covid = api_call('CRI')
-      return render_template('index.html', title='Stats', cr_covid=cr_covid, countries=countries)
+      return render_template('index.html', title='Home', cr_covid=cr_covid, countries=countries)
   cr_covid = api_call('cri')
   country = request.form.get('choose_country')
   country_covid = api_call(country)
   articles = get_the_news()
-  return render_template('index.html', title='Stats', cr_covid=cr_covid, country_covid=country_covid, country=country, articles=articles)
+  return render_template('index.html', title='Home', cr_covid=cr_covid, country_covid=country_covid, country=country, articles=articles)
   
     
 
@@ -66,7 +66,7 @@ def login():
 @app.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('home'))
 
 @app.route("/account", methods=["GET", "POST"])
 @login_required
@@ -116,23 +116,26 @@ def reset_token(token):
 
 
 @app.route("/moving_arround", methods=["GET", "POST"])
+@login_required
 def moving_arround():
     form = LicensePlate()
     even = [0, 2, 4, 6, 8]
     odd = [1, 3, 5, 7, 9]
     if form.validate_on_submit():
         plate = int(form.digits.data)
-        return render_template('moving_arround.html', title='Moving Arround', plate=plate, form=form, even=even, odd=odd)
-    return render_template('moving_arround.html', title='Moving Arround', form=form)
+        return render_template('moving_arround.html', title='Transportation', plate=plate, form=form, even=even, odd=odd)
+    return render_template('moving_arround.html', title='Transportation', form=form)
 
 
 @app.route("/news")
+@login_required
 def news():
     news = get_the_news()
     return render_template('news.html', title='News', news=news)
 
 
 @app.route("/stats", methods=["GET", "POST"])
+@login_required
 def stats():
   # Use functions containing data from API call for select dropdown on GET method and user query on POST method
   if request.method == "GET":

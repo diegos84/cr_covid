@@ -1,12 +1,12 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="container">
+<div class="container" style="margin-top: 10%;">
   <div class="row justify-content-md-center">
     <div class="col-md-12">
       <h2>COVID-19 Stats</h2>
     </div>
     <div class="col-md-6" style="margin: 25px;">
-      <h4>Choose a country to compare</h4>
+      <h4>Choose a country to compare with Costa Rica</h4>
       <form action="{{ url_for('stats')}}" method="POST">
         <div class="form-group">
           <select class="form-control" name="choose_country" id="cntry">
@@ -21,7 +21,7 @@
   </div>
   {% if request.method == "POST" %}
     <div class="row justify-content-md-center"">
-      <div class="col-md-12" style="margin-top: 20px;">
+      <div class="col-md-8" style="margin-top: 20px;">
         <table class="table table-striped">
           <thead>
             <tr>
@@ -57,7 +57,7 @@
               <td>{{ country_covid["deaths_per_million"] }}</td>
             </tr>
             <tr>
-              <th scope="row">Tests/million</th>
+              <th scope="row">Tests/Million</th>
               <td>{{ cr_covid["tests_per_million"] }}</td>
               <td>{{ country_covid["tests_per_million"] }}</td>
             </tr>

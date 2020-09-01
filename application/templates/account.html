@@ -1,11 +1,11 @@
 {% extends "layout.html" %}
 {% block content %}
-<div class="content-section">
+<div class="content-section" style="margin-top: 10%;">
   <form action="" method="POST">
     <!-- This hidden tag add a CSRF Token that works with the secret key on application.py -->
     {{ form.hidden_tag() }}
     <fieldset class="form-group">
-      <legend class="mb-4">Update your tracker account</legend>
+      <legend class="mb-4">Update your account</legend>
       <div class="form-group">
         {% if form.username.errors %}
           {{ form.username.label(class="form-control-label is-invalid") }}
