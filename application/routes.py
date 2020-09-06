@@ -115,16 +115,16 @@ def reset_token(token):
     return render_template('reset_token.html', title='Reset Password', form=form)
 
 
-@app.route("/moving_arround", methods=["GET", "POST"])
+@app.route("/transportation", methods=["GET", "POST"])
 @login_required
-def moving_arround():
+def transportation():
     form = LicensePlate()
     even = [0, 2, 4, 6, 8]
     odd = [1, 3, 5, 7, 9]
     if form.validate_on_submit():
         plate = int(form.digits.data)
-        return render_template('moving_arround.html', title='Transportation', plate=plate, form=form, even=even, odd=odd)
-    return render_template('moving_arround.html', title='Transportation', form=form)
+        return render_template('transportation.html', title='Transportation', plate=plate, form=form, even=even, odd=odd)
+    return render_template('transportation.html', title='Transportation', form=form)
 
 
 @app.route("/news")

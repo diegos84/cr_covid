@@ -32,12 +32,10 @@ def api_call(country):
         payload = r.json()
         return {
             "country": payload["country"],
-            "flag": payload["countryInfo"]["flag"],
             "cases": payload["cases"],
             "active": payload["active"],
             "critical": payload["critical"],
             "deaths": payload["deaths"],
-            "tests": payload["tests"],
             "cases_per_million": payload["casesPerOneMillion"],
             "deaths_per_million": payload["deathsPerOneMillion"],
             "tests_per_million": payload["testsPerOneMillion"]
