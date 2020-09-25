@@ -5,7 +5,7 @@ from wtforms.validators import DataRequired, Length, EqualTo, NumberRange, Regex
 from application.models import Users
 
 
-# WTForms - Each instance of a form class (called form inside any route) will inherit atributes used for data validation, and methods used for SQL queries
+# WTForms - Each instance of a form class (called form inside any route) will inherit attributes used for data validation, and methods used for SQL queries
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), 

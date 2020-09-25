@@ -2,7 +2,7 @@
 ___
   ## Project
 
-  Provide solutions for tourists looking to visit Costa Rica safely during the pandemic. These include information about the requirements for entry into the country from abroad, live statistics about COVID's impact in Costa Rica vs. any contry in the world, a collection of the most recent news in english about COVID-19 in Costa Rica and a license plate lookup tool to aid with the country's vehicular restriction.
+  Provide solutions for tourists looking to visit Costa Rica safely during the pandemic. These include information about the requirements for entry into the country from abroad, live statistics about COVID's impact in Costa Rica vs. any country in the world, a collection of the most recent news in english about COVID-19 in Costa Rica and a license plate lookup tool to aid with the country's vehicular restriction.
 
   ## Ramp-up
   1. CD into the project root and create a virtual environment: `python3 -m venv env`
@@ -46,7 +46,7 @@ ___
   The project was developed as a package using Python's framework Flask. It includes a registration process in order to use a database and different types of forms for complexity and security features like password encryption and password reset via automated email using a link with an embedded token. Its configuration settings have been created into a class to allows using inheritance when setting up different configurations if needed. The stats comparison tool makes an API call (using Postman), the license plate lookup tool heavily relies on Jinja2 templating engine and the news articles are scrapped using the Beautiful Soup library.
   <br />
   ### Front-end
-  The project relies on Boostrap for its styling. It also uses additional features like smoooth scrolling for navigation, fixed background image and opening embedded links in separate tabs.
+  The project relies on Bootstrap for its styling. It also uses additional features like smooth scrolling for navigation, fixed background image and opening embedded links in separate tabs.
 
   ## Credits
   

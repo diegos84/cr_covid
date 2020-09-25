@@ -5,5 +5,11 @@
         "--load-plugins",
         "pylint-flask"
     ],
+    "cSpell.words": [
+      "COVID's",
+      "SQLALCHEMY",
+      "bcrypt",
+      "lxml"
+    ],
 
 }

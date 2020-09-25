@@ -15,7 +15,7 @@ def send_reset_email(user):
     msg.body = f'''Please visit the following link to resert your password:
 {url_for('reset_token', token=token, _external=True)}
 
-If you did not make this request, please just ignore this email to prevent any account chages to take place.
+If you did not make this request, please just ignore this email to prevent any account changes to take place.
 '''
     mail.send(msg)
 
@@ -61,7 +61,7 @@ def get_the_news():
     # Create a list to append all the scrapped data and return it
     news = []
     # Iterate through segment and find all the tags with relevant data
-    # Must use an underscore after the word 'class' to differenciate from the keyword for classes in Python
+    # Must use an underscore after the word 'class' to differentiate from the keyword for classes in Python
     for segment in soup.find_all('div', class_='poster size-normal size-350'):
         # Must use [] to get the value from an attribute in a tag
         link = segment.find('a', class_='poster-image mt-radius')['href']

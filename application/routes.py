@@ -9,7 +9,7 @@ from application.handlers import error_403, error_404, error_500
 from application.utils import send_reset_email, api_call, all_countries, get_the_news
 from flask_login import login_user, current_user, logout_user, login_required
 
-# COMENT-OUT LIST, NOT RELEVANT SINCE LAST POLICY CHANGE BY THE GOVERNMENT
+# COMMENT-OUT LIST, NOT RELEVANT SINCE LAST POLICY CHANGE BY THE GOVERNMENT
 # cantons = []    
 # with open('application/static/cantons.csv', newline='') as csv_file:
 #     csv_reader = csv.reader(csv_file)
@@ -76,7 +76,7 @@ def account():
         current_user.username = form.username.data
         current_user.email = form.email.data
         db.session.commit()
-        flash('Account updated sucessfully!', 'primary')
+        flash('Account updated successfully!', 'primary')
         return redirect(url_for('account'))
     elif request.method == 'GET':
         form.username.data = current_user.username
@@ -92,7 +92,7 @@ def reset_request():
     if form.validate_on_submit():
         user = Users.query.filter_by(email=form.email.data).first()
         send_reset_email(user)
-        flash('An email with instrucctions has been sent to help you reset your password', 'primary')
+        flash('An email with instructions has been sent to help you reset your password', 'primary')
         return redirect(url_for('login'))
     return render_template('reset_request.html', title='Reset Password', form=form)
 
